@@ -1,6 +1,7 @@
 [workspace]
 
 members = [
-    "first",
-    "third",
+    "1.first",
+    "3.third",
+    "4.fourth",
 ]

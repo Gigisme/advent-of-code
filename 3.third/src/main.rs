@@ -1,11 +1,11 @@
 use std::collections::HashSet;
 use std::fs::File;
-use std::io;
-use std::io::{BufRead, BufReader, Lines};
+use utils::read_lines;
+use std::io::{BufReader, Lines};
 use std::path::Path;
 
 fn main() {
-    let file_name = Path::new("third/input");
+    let file_name = Path::new("3.third/input");
     let lines = match read_lines(file_name) {
         Ok(lines) => lines,
         Err(e) => panic!("Problem opening file: {}", e)
@@ -17,12 +17,6 @@ fn main() {
     let sum:i32 = score.iter().sum();
     println!("{}", sum);
 
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-    where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }
 
 fn find_first_repeat(first: &str, second: &str) -> Option<Vec<char>> {
@@ -59,7 +53,7 @@ fn part_one(lines: Lines<BufReader<File>>) -> Vec<i32> {
                 let half = string.split_at(string.len()/2);
                 let repeat = find_first_repeat(half.0, half.1);
                 match repeat {
-                    None => {}
+                    None => {panic!("No repeats found")}
                     Some(letter) => {
                         scores.push(score_letter(letter[0]) as i32);
                     }
@@ -79,12 +73,12 @@ fn part_two(lines: Lines<BufReader<File>>) -> Vec<i32> {
             Ok(string) => {
                 chunk.push(string);
             }
-            Err(_) => {}
+            Err(e) => panic!("Problem reading: {}", e)
         }
         if chunk.len() == 3 {
             let repeats = find_first_repeat(&*chunk[0], &*chunk[1]);
             match repeats {
-                None => {}
+                None => {panic!("No repeats found")}
                 Some(repeats) => {
                     let mut letters: String = String::new();
                     for char in repeats {
@@ -92,7 +86,7 @@ fn part_two(lines: Lines<BufReader<File>>) -> Vec<i32> {
                     }
                     let badge = find_first_repeat(&*chunk[2],&letters);
                     match badge {
-                        None => {}
+                        None => {panic!("No repeats found")}
                         Some(letter) => {
                             scores.push(score_letter(letter[0]) as i32)
                         }

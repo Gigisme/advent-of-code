@@ -1,9 +1,10 @@
 use std::fs::{File};
-use std::io::{self, BufRead, BufReader};
+use std::io::{self, BufReader};
 use std::path::Path;
+use utils::read_lines;
 
 fn main() {
-    let file = Path::new("first/input.txt");
+    let file = Path::new("1.first/input.txt");
     let lines = match read_lines(file) {
         Ok(lines) => lines,
         Err(e) => panic!("Problem opening file: {}", e)
@@ -28,12 +29,6 @@ fn main() {
     }
     let sum:i32 = top3.iter().sum();
     println!("{:?}", sum)
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }
 
 fn store_lines(lines: io::Lines<BufReader<File>>) -> Vec<Vec<i32>>
