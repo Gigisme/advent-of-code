@@ -10,7 +10,7 @@ fn main() {
     let mut result: i32 = 0;
     match lines {
         Ok(lines) => {
-            result = part_one(lines);
+            result = task(lines);
         }
         Err(e) => {panic!("Error reading file, {}", e)}
     }
@@ -36,7 +36,7 @@ fn parse_string(line: String) -> Option<(Vec<i32>, Vec<i32>)> {
     return None
 }
 
-fn cleans_same(left: Vec<i32>, right: Vec<i32>) -> bool {
+fn has_overlap(left: Vec<i32>, right: Vec<i32>) -> bool {
     //println!("{:?}, {:?}", left, right);
     if left[0] <= right[0] && left[1] >= right[1]
     { return true }
@@ -45,7 +45,15 @@ fn cleans_same(left: Vec<i32>, right: Vec<i32>) -> bool {
     return false
 }
 
-fn part_one(lines: Lines<BufReader<File>>) -> i32 {
+fn has_overlap_2(range1: Vec<i32>, range2: Vec<i32>) -> bool {
+    let end_of_range1 = range1[range1.len() -1];
+    let end_of_range2 = range2[range2.len() - 1];
+
+    (range1[0] <= end_of_range2 && end_of_range1 >= range2[0]) ||
+        (range2[0] <= end_of_range1 && end_of_range2 >= range1[0])
+}
+
+fn task(lines: Lines<BufReader<File>>) -> i32 {
     let mut score: i32 = 0;
     for line in lines {
         match line {
@@ -54,7 +62,8 @@ fn part_one(lines: Lines<BufReader<File>>) -> i32 {
                 match parsed {
                     None => {eprintln!("Error parsing")}
                     Some(result) => {
-                        if cleans_same(result.0, result.1)
+                        // Change this part for part one
+                        if has_overlap_2(result.0, result.1)
                         {score += 1}
                     }
                 }
