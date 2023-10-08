@@ -2,7 +2,8 @@
 resolver = "2"
 
 members = [
-    "1.first",
-    "3.third",
-    "4.fourth",
+    "first",
+    "third",
+    "fourth",
+    "fifth",
 ]

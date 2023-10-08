@@ -4,7 +4,7 @@ use std::path::Path;
 use utils::read_lines;
 
 fn main() {
-    let file = Path::new("1.first/input.txt");
+    let file = Path::new("first/input.txt");
     let lines = match read_lines(file) {
         Ok(lines) => lines,
         Err(e) => panic!("Problem opening file: {}", e)
