@@ -24,7 +24,8 @@ fn main() {
         }
         else {
             let commands = parse_command(&line);
-            boxes = move_boxes(boxes, commands[0], commands[1] as usize, commands[2] as usize)
+            //boxes = move_boxes_p1(boxes, commands[0], commands[1] as usize, commands[2] as usize)
+            boxes = move_boxes_p2(boxes, commands[0], commands[1] as usize, commands[2] as usize)
         }
     }
     for row in boxes {
@@ -61,10 +62,21 @@ fn parse_command(string: &str) -> Vec<i32> {
     return numbers;
 }
 
-fn move_boxes(mut boxes: Vec<Vec<char>>, amount: i32, from_index: usize, to_index:usize) -> Vec<Vec<char>> {
-    for i in 0..amount {
+fn move_boxes_p1(mut boxes: Vec<Vec<char>>, amount: i32, from_index: usize, to_index:usize) -> Vec<Vec<char>> {
+    for _ in 0..amount {
         let mv_box = boxes[from_index - 1].pop().unwrap();
         boxes[to_index - 1].push(mv_box);
+    }
+    return boxes;
+}
+
+fn move_boxes_p2(mut boxes: Vec<Vec<char>>, amount: i32, from_index: usize, to_index: usize) -> Vec<Vec<char>> {
+    let mut mv_box: Vec<char> = Vec::new();
+    for _ in 0..amount {
+        mv_box.push(boxes[from_index - 1].pop().unwrap())
+    }
+    for _ in 0..amount {
+        boxes[to_index - 1].push(mv_box.pop().unwrap())
     }
     return boxes;
 }
