@@ -7,7 +7,8 @@ fn main() {
     let file_name = Path::new("eighth/input");
     let lines = read_lines(file_name).unwrap();
     let data = pare_data(lines);
-    part_1(data);
+    // part_1(data);
+    part_2(data);
 }
 
 fn pare_data(lines: Lines<BufReader<File>>) -> Vec<Vec<i8>> {
@@ -85,4 +86,80 @@ fn part_1(data: Vec<Vec<i8>>) {
         }
     }
     println!("Visible tress: {}", visible_tress)
+}
+
+fn part_2(data: Vec<Vec<i8>>) {
+    let width = data.len();
+    let height = data[0].len();
+    let mut max_score = 0;
+    //edge score 0 so ignoring edges
+    for y in 1..height - 1 {
+        for x in 1..width-1 {
+            let mut score = 0;
+            score = check_up(&data, x, y);
+            score *= check_down(&data, x, y);
+            score *= check_left(&data, x, y);
+            score *= check_right(&data, x, y);
+            if score > max_score {
+                max_score = score;
+            }
+        }
+
+    }
+    println!("Highest scenic score: {}", max_score);
+}
+
+fn check_up(data: &Vec<Vec<i8>>, x: usize, y: usize) -> i32 {
+    let mut score: i32 = 0;
+    let tree_size = data[x][y];
+
+    let mut iterator = data[x][0..y].iter().rev();
+    loop {
+        if let Some(value) = iterator.next() {
+            score += 1;
+            if value >= &tree_size {
+                break;
+            }
+        } else {break;}
+    }
+    return score;
+}
+
+fn check_down(data: &Vec<Vec<i8>>, x: usize, y: usize) -> i32  {
+    let mut score = 0;
+    let tree_size = data[x][y];
+
+    for i in y+1..data[x].len() {
+        score += 1;
+        if data[x][i] >= tree_size {
+            break;
+        }
+    }
+    return score;
+}
+
+fn check_left(data: &Vec<Vec<i8>>, x: usize, y: usize) -> i32  {
+    let mut score = 0;
+    let tree_size = data[x][y];
+
+    for i in (0..x).rev() {
+        score +=1;
+        if data[i][y] >= tree_size {
+            break;
+        }
+    }
+    return score;
+}
+
+fn check_right(data: &Vec<Vec<i8>>, x: usize, y: usize) -> i32  {
+    let mut score = 0;
+    let tree_size = data[x][y];
+
+    for i in x+1..data.len() {
+        score += 1;
+        if data[i][y] >= tree_size {
+            break;
+        }
+    }
+    return score;
 }
