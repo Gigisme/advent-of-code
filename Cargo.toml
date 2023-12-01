@@ -2,11 +2,11 @@
 resolver = "2"
 
 members = [
-    "first",
-    "third",
-    "fourth",
-    "fifth",
-    "sixth",
-    "seventh",
-    "eighth",
+    "2022/first",
+    "2022/third",
+    "2022/fourth",
+    "2022/fifth",
+    "2022/sixth",
+    "2022/seventh",
+    "2022/eighth",
 ]

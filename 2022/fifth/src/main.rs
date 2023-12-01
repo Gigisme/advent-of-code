@@ -3,7 +3,7 @@ use regex::Regex;
 use utils::read_lines;
 
 fn main() {
-    let file = Path::new("fifth/input");
+    let file = Path::new("2022/fifth/input");
     let mut lines = match read_lines(file) {
         Ok(lines) => lines,
         Err(e) => panic!("Problem opening file: {}", e)

@@ -5,7 +5,7 @@ use std::io::{BufReader, Lines};
 use std::path::Path;
 
 fn main() {
-    let file_name = Path::new("third/input");
+    let file_name = Path::new("2022/third/input");
     let lines = match read_lines(file_name) {
         Ok(lines) => lines,
         Err(e) => panic!("Problem opening file: {}", e)

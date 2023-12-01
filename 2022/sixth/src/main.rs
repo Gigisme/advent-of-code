@@ -2,7 +2,7 @@ use std::path::Path;
 use utils::read_lines;
 
 fn main() {
-    let file = Path::new("sixth/input");
+    let file = Path::new("2022/sixth/input");
     let mut lines = match read_lines(file) {
         Ok(lines) => lines,
         Err(e) => panic!("Problem opening file: {}", e)

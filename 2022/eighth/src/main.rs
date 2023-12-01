@@ -4,7 +4,7 @@ use std::path::Path;
 use utils::read_lines;
 
 fn main() {
-    let file_name = Path::new("eighth/input");
+    let file_name = Path::new("2022/eighth/input");
     let lines = read_lines(file_name).unwrap();
     let data = pare_data(lines);
     // part_1(data);

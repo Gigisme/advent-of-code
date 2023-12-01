@@ -5,7 +5,7 @@ use std::path::Path;
 use utils::read_lines;
 
 fn main() {
-    let file_name = Path::new("fourth/input");
+    let file_name = Path::new("2022/fourth/input");
     let lines = read_lines(file_name);
     let mut result: i32 = 0;
     match lines {

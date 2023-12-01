@@ -8,7 +8,7 @@ const FILESYSTEM_SIZE: usize = 70000000;
 const UPDATE_SIZE: usize = 30000000;
 
 fn main() {
-    let file_name = Path::new("seventh/input");
+    let file_name = Path::new("2022/seventh/input");
     let mut lines = read_lines(file_name).unwrap();
     // Skip first line, its root dir
     lines.next();
